@@ -22,6 +22,9 @@ export const MenuWrapper = styled.div``;
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  ${Media.down.m} {
+    justify-content: center;
+  }
 `;
 
 export const LogoTextWrapper = styled.div`
@@ -35,10 +38,11 @@ export const VersionText = styled(Text)`
   margin-bottom: 7px;
 `;
 
-export const MenuItemsContainer = styled.div`
+export const MenuItemsContainer = styled.div<{$isMobileOpen: boolean}>`
   margin-top: 65px;
   ${Media.down.m} {
     margin-top: 30px;
+    display: ${({$isMobileOpen}) => (!$isMobileOpen ? 'none' : 'block')};
   }
 `;
 
@@ -94,4 +98,25 @@ export const UserPosition = styled(Typography)`
   ${Media.down.m} {
     display: none;
   }
+`;
+
+export const MobileMenuIconWrapper = styled.div`
+  display: none;
+  ${Media.down.m} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 20px;
+  }
+`;
+
+export const MobileMenuText = styled(Typography)`
+  margin-top: 5px;
+`;
+
+export const MobileMenuButton = styled.button`
+  background: transparent;
+  border: none;
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {IconSvg} from '../../ui-kit/icons';
 import {icon} from '../../ui-kit/icons/types';
 import {Typography} from '../../ui-kit/Typography/Text';
@@ -16,13 +16,18 @@ import {
   UserTextWrapper,
   MenuWrapper,
   UserPosition,
+  MobileMenuIconWrapper,
+  MobileMenuText,
+  MobileMenuButton,
 } from './styles';
+import {MenuOutlined} from '@ant-design/icons';
 import userImg from '../../mockData/user.png';
 import {userData} from '../../mockData';
 
 const menuItems: icon[] = ['dashboard', 'product', 'customers', 'income', 'promote', 'help'];
 
 export const Menu: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   //mockData - need to use useLocation hook here
   const pathname = 'customers';
 
@@ -39,7 +44,7 @@ export const Menu: React.FC = () => {
           </LogoTextWrapper>
         </LogoContainer>
 
-        <MenuItemsContainer>
+        <MenuItemsContainer $isMobileOpen={isMobileMenuOpen}>
           {menuItems.map((item) => (
             <MenuButton key={item} $isActive={item === pathname}>
               <ButtonTextWrapper>
@@ -70,6 +75,13 @@ export const Menu: React.FC = () => {
           </UserPosition>
         </UserTextWrapper>
       </UserBlock>
+
+      <MobileMenuIconWrapper>
+        <MobileMenuButton onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <MenuOutlined />
+          <MobileMenuText variant="body">Menu</MobileMenuText>
+        </MobileMenuButton>
+      </MobileMenuIconWrapper>
     </MenuContainer>
   );
 };
