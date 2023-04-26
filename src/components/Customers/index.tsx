@@ -69,7 +69,11 @@ export const Customers: React.FC = () => {
       setTableData([...data]);
       return;
     }
-    const filtered = tableData.filter((el) => Object.values(el).some((val) => val.toLowerCase().includes(v)));
+
+    const filterValues = (d: DataType[]) =>
+      d.filter((el: DataType) => Object.values(el).some((val) => val.toLowerCase().includes(v.toLowerCase())));
+    const filtered = filterValues(tableData.length ? tableData : data);
+
     setTableData([...filtered]);
   };
   return (
