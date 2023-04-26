@@ -63,18 +63,17 @@ const data: DataType[] = customersData.map((d, i) => ({...d, key: i.toString()})
 
 export const Customers: React.FC = () => {
   const [tableData, setTableData] = useState(data);
-  const [searchValue, setSearchValue] = useState('');
   const searchItems = (v: string) => {
     if (v === '') {
       setTableData(data);
       return;
     }
 
-    const filterValues = (d: DataType[]) =>
-      d.filter((el: DataType) => Object.values(el).some((val) => val.toLowerCase().includes(v.toLowerCase())));
-    const filtered = filterValues(tableData.length ? tableData : data);
+    const filtered = data.filter((el: DataType) =>
+      Object.values(el).some((val) => val.toLowerCase().includes(v.toLowerCase())),
+    );
 
-    setTableData([...filtered]);
+    setTableData(filtered);
   };
   return (
     <CustomersContainer>
@@ -88,15 +87,8 @@ export const Customers: React.FC = () => {
           <StyledInput
             placeholder="Search"
             prefix={<IconSvg type={'search'} width="20" height="20" />}
-            value={searchValue}
             onChange={({target}) => {
-              setSearchValue(target.value);
-            }}
-            onKeyDown={({key}) => {
-              if (key === 'Enter') {
-                searchItems(searchValue);
-                setSearchValue('');
-              }
+              searchItems(target.value);
             }}
           />
         </ContentHeader>
