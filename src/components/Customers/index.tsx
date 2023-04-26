@@ -66,7 +66,7 @@ export const Customers: React.FC = () => {
   const [searchValue, setSearchValue] = useState('');
   const searchItems = (v: string) => {
     if (v === '') {
-      setTableData([...data]);
+      setTableData(data);
       return;
     }
 
